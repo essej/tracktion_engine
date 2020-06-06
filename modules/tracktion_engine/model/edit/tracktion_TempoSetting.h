@@ -34,7 +34,7 @@ public:
     static juce::ValueTree create (double startBeat, double bpm, float curve);
 
     static constexpr double minBPM = 20.0;
-    static constexpr double maxBPM = 300.0;
+    static constexpr double maxBPM = 1000.0;
 
     //==============================================================================
     juce::String getSelectableDescription() override;
