@@ -26,7 +26,7 @@ MidiAudioNode::MidiAudioNode (MidiMessageSequence sequence,
       wasMute (mute_),
       shouldCreateMessagesForTime (nodeToReplace == nullptr)
 {
-    jassert (channelNumbers.getStart() > 0 && channelNumbers.getEnd() <= 16);
+    jassert (channelNumbers.getStart() > 0 && channelNumbers.getEnd() <= 17);
 
     if (nodeToReplace != nullptr)
         midiSourceID = nodeToReplace->midiSourceID;
@@ -116,7 +116,7 @@ void MidiAudioNode::createMessagesForTime (double time, MidiMessageArray& buffer
 
         Array<MidiMessage> mpeMessagesToAddAtStart;
 
-        for (int i = channelNumbers.getStart(); i <= channelNumbers.getEnd(); ++i)
+        for (int i = channelNumbers.getStart(); i < channelNumbers.getEnd(); ++i)
             MPEStartTrimmer::reconstructExpression (mpeMessagesToAddAtStart, ms, indexOfTime, i);
 
         for (auto& m : mpeMessagesToAddAtStart)
@@ -127,7 +127,7 @@ void MidiAudioNode::createMessagesForTime (double time, MidiMessageArray& buffer
         {
             juce::Array<juce::MidiMessage> controllerMessages;
 
-            for (int i = channelNumbers.getStart(); i <= channelNumbers.getEnd(); ++i)
+            for (int i = channelNumbers.getStart(); i < channelNumbers.getEnd(); ++i)
                 ms.createControllerUpdatesForTime (i, time, controllerMessages);
 
             if (! controllerMessages.isEmpty())

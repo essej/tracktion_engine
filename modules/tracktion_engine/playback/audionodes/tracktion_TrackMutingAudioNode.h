@@ -44,6 +44,7 @@ public:
 
         if (wasJustMuted (isPlayingNow))
         {
+            std::cerr << "Just notetrack muted: " << track->getName() << std::endl;
             // send midi off events if we don't want to process midi while muted
             if (! callInputWhileMuted && ! processMidiWhileMuted)
                 sendAllNotesOffIfDesired (rc);
@@ -60,6 +61,7 @@ public:
         }
         else if (wasJustUnMuted (isPlayingNow))
         {
+            std::cerr << "Just notetrack UNmuted: " << track->getName() << std::endl;
             input->renderOver (rc);
 
             rampOver (rc, 0.0f, 1.0f);
@@ -91,6 +93,8 @@ public:
 
         if (wasJustMuted (isPlayingNow))
         {
+            std::cerr << "Just notetrack muted (A): " << track->getName() << std::endl;
+
             // just been muted, so send some midi off events
             if (! callInputWhileMuted && ! processMidiWhileMuted)
                 sendAllNotesOffIfDesired (rc);
@@ -99,6 +103,8 @@ public:
         }
         else if (wasJustUnMuted (isPlayingNow))
         {
+            std::cerr << "Just notetrack UNmuted (A): " << track->getName() << std::endl;
+
             rampAdd (rc, 0.0f, 1.0f);
         }
         else if (wasBeingPlayed)

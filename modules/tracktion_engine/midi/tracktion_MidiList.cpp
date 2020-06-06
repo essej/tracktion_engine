@@ -1106,7 +1106,7 @@ template<typename EventType>
 const juce::Array<EventType*>& getEventsChecked (const juce::Array<EventType*>& events)
 {
    #if JUCE_DEBUG
-    double lastBeat = 0.0;
+    double lastBeat = -10.0;
 
     for (auto* e : events)
     {

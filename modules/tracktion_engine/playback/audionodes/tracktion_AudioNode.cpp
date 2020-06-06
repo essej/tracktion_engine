@@ -21,7 +21,14 @@ AudioNode::~AudioNode()
 
 void AudioNode::callRenderAdding (const AudioRenderContext& rc)
 {
+    // jlc - allNotesOff could be set on the bufferForMidiMessages that still needs to be propogated down
+    bool allnotesoff = rc.bufferForMidiMessages ? rc.bufferForMidiMessages->isAllNotesOff : false;
+
     rc.clearAll();
+    if (rc.bufferForMidiMessages) {
+        rc.bufferForMidiMessages->isAllNotesOff = allnotesoff;
+    }
+    
     renderAdding (rc);
 }
 
