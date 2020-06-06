@@ -33,6 +33,26 @@ Engine::Engine (std::unique_ptr<PropertyStorage> ps, std::unique_ptr<UIBehaviour
     initialise();
 }
 
+Engine::Engine (juce::String applicationName, UIBehaviour * ub, EngineBehaviour * eb)
+{
+    instance = this;
+
+    //jassert (ps != nullptr);
+    propertyStorage = std::make_unique<PropertyStorage> (applicationName);
+
+    if (ub == nullptr)
+        uiBehaviour = std::make_unique<UIBehaviour>();
+    else
+        uiBehaviour.reset(ub);
+
+    if (! eb)
+        engineBehaviour = std::make_unique<EngineBehaviour>();
+    else
+        engineBehaviour.reset(eb);
+
+    initialise();
+}
+
 Engine::Engine (String applicationName, std::unique_ptr<UIBehaviour> ub, std::unique_ptr<EngineBehaviour> eb)
     : Engine (std::make_unique<PropertyStorage> (applicationName), std::move (ub), std::move (eb))
 {

@@ -25,6 +25,7 @@ public:
     Engine (juce::String applicationName);
     Engine (juce::String applicationName, std::unique_ptr<UIBehaviour>, std::unique_ptr<EngineBehaviour>);
     Engine (std::unique_ptr<PropertyStorage>, std::unique_ptr<UIBehaviour>, std::unique_ptr<EngineBehaviour>);
+    Engine (juce::String applicationName, UIBehaviour * ub, EngineBehaviour * eb);
     ~Engine();
 
     static Engine& getInstance(); // Temporary, until all singleton uses are cleaned up
